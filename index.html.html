@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FITZONE – nowoczesna siłownia oferująca trening personalny, zajęcia grupowe i strefę cardio." />
+  <meta name="keywords" content="siłownia, fitness, trening personalny, cardio, crossfit" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <title>FITZONE – Siłownia</title>
+  <style>
+/* =============================================
+   FITZONE – style.css
+   Paleta: #0a0a0a (tło), #e31d1d (czerwony), 
+           #ffffff (biały), #1a1a1a (karta)
+   Fonty: Bebas Neue (display), Inter (body)
+============================================= */
+
+/* === RESET & BASE === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0a0a0a;
+  --surface:  #111111;
+  --card:     #181818;
+  --red:      #e31d1d;
+  --red-dark: #b01515;
+  --white:    #ffffff;
+  --gray:     #888888;
+  --border:   #2a2a2a;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --transition: 0.3s cubic-bezier(.25,.46,.45,.94);
+  --radius: 4px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+a { text-decoration: none; color: inherit; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section {
+  padding: 100px 0;
+}
+
+/* === TYPOGRAPHY === */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  line-height: 1.0;
+}
+
+h1 { font-size: clamp(4rem, 10vw, 9rem); }
+h2 { font-size: clamp(2.4rem, 5vw, 4rem); }
+h3 { font-size: 1.6rem; letter-spacing: 0.05em; }
+
+h2 em { font-style: normal; color: var(--red); }
+
+.section-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section-sub {
+  color: var(--gray);
+  margin-top: 12px;
+}
+
+.center { text-align: center; }
+
+/* === BUTTONS === */
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+  border-radius: var(--radius);
+}
+
+.btn-primary {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+}
+.btn-primary:hover {
+  background: var(--red-dark);
+  border-color: var(--red-dark);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255,255,255,0.4);
+}
+.btn-ghost:hover {
+  border-color: var(--white);
+  transform: translateY(-2px);
+}
+
+.full-width { width: 100%; text-align: center; display: block; }
+
+/* === NAVBAR === */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  transition: background var(--transition), backdrop-filter var(--transition);
+  padding: 0;
+}
+
+#navbar.scrolled {
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+  color: var(--white);
+}
+.logo span { color: var(--red); }
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 36px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+  transition: color var(--transition);
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--red);
+  transition: width var(--transition);
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-links a.active {
+  color: var(--white);
+}
+
+.nav-links a.active::after {
+  width: 100%;
+}
+
+
+.nav-cta {
+  background: var(--red) !important;
+  color: var(--white) !important;
+  padding: 8px 20px;
+  border-radius: var(--radius);
+}
+.nav-cta::after { display: none; }
+.nav-cta:hover { background: var(--red-dark) !important; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--white);
+  transition: transform var(--transition), opacity var(--transition);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* === HERO === */
+#hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1600&q=80') center/cover no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0,0,0,0.85) 0%,
+    rgba(0,0,0,0.5) 50%,
+    rgba(227,29,29,0.15) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+
+.hero-content h1 {
+  color: var(--white);
+  line-height: 0.92;
+  margin-bottom: 24px;
+}
+
+.hero-content h1 span {
+  -webkit-text-stroke: 2px var(--white);
+  color: transparent;
+}
+
+.hero-sub {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.08em;
+  margin-bottom: 40px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+.hero-scroll-hint span {
+  display: block;
+  width: 2px;
+  height: 48px;
+  background: linear-gradient(to bottom, transparent, var(--red));
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50%       { opacity: 1;   transform: scaleY(1); }
+}
+
+/* === STATS BAR === */
+.stats-bar {
+  background: var(--red);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat {
+  padding: 28px 16px;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.2);
+  transition: background var(--transition);
+}
+.stat:last-child { border-right: none; }
+.stat:hover { background: var(--red-dark); }
+
+.stat-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+  color: var(--white);
+}
+
+.stat-num::after {
+  content: attr(data-suffix);
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  margin-top: 4px;
+}
+
+/* === ABOUT === */
+#about {
+  background: var(--surface);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-text h2 { margin-bottom: 24px; }
+.about-text p { color: var(--gray); margin-bottom: 16px; line-height: 1.7; }
+.about-text .btn { margin-top: 8px; }
+
+.about-img-wrap {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 2px;
+  overflow: visible;
+}
+
+.about-img-wrap img {
+  border-radius: 2px;
+  filter: grayscale(20%);
+  transition: filter var(--transition);
+}
+.about-img-wrap:hover img { filter: grayscale(0%); }
+
+.about-badge {
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  background: var(--red);
+  padding: 20px 24px;
+  border-radius: 2px;
+  z-index: 2;
+}
+.about-badge strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  line-height: 1;
+}
+.about-badge span {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+
+/* === OFFER === */
+#offer { background: var(--bg); }
+#offer h2 { margin-bottom: 56px; }
+
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.offer-card {
+  background: var(--card);
+  padding: 40px 32px;
+  position: relative;
+  transition: background var(--transition), transform var(--transition);
+}
+.offer-card:hover {
+  background: #1f1f1f;
+  transform: translateY(-4px);
+  z-index: 1;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+}
+
+.offer-card.featured {
+  background: #1a0a0a;
+  border: 1px solid var(--red);
+  margin: -1px;
+}
+
+.offer-badge-tag {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: var(--red);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+.offer-icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.offer-card h3 { color: var(--white); margin-bottom: 12px; }
+.offer-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.65; }
+
+/* === PRICING === */
+#pricing { background: var(--surface); }
+#pricing h2 { margin-bottom: 8px; }
+#pricing .section-sub { margin-bottom: 56px; }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.price-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  position: relative;
+  transition: border-color var(--transition), transform var(--transition);
+}
+.price-card:hover {
+  border-color: rgba(227,29,29,0.5);
+  transform: translateY(-6px);
+}
+
+.price-card.popular {
+  border-color: var(--red);
+  transform: scale(1.03);
+  background: #160808;
+}
+.price-card.popular:hover { transform: scale(1.03) translateY(-4px); }
+
+.popular-tag {
+  position: absolute;
+  top: -13px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--red);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.price-card h3 {
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+
+.price { margin-bottom: 32px; }
+.price-num {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--white);
+}
+.price-unit {
+  font-size: 0.8rem;
+  color: var(--gray);
+  margin-left: 4px;
+}
+
+.price-features {
+  list-style: none;
+  margin-bottom: 32px;
+}
+.price-features li {
+  padding: 8px 0;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--white);
+}
+.price-features li.faded { color: var(--gray); }
+.price-features li:last-child { border-bottom: none; }
+
+/* === GALLERY === */
+#gallery { background: var(--bg); }
+#gallery h2 { margin-bottom: 40px; }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 240px 240px;
+  gap: 4px;
+  margin-top: 40px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.gallery-item img {
+  transition: transform 0.5s ease, filter 0.5s ease;
+  filter: brightness(0.8);
+}
+.gallery-item:hover img {
+  transform: scale(1.06);
+  filter: brightness(0.6);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay span {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 2px;
+}
+
+.gallery-item.tall { grid-row: span 2; }
+.gallery-item.wide { grid-column: span 2; }
+
+/* === CONTACT === */
+#contact { background: var(--surface); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.contact-info h2 { margin-bottom: 20px; }
+.contact-info > p { color: var(--gray); margin-bottom: 40px; line-height: 1.7; }
+
+.contact-details { display: flex; flex-direction: column; gap: 24px; }
+
+.contact-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.contact-icon { font-size: 1.3rem; margin-top: 2px; }
+.contact-item strong { display: block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 2px; }
+.contact-item span { font-size: 0.9rem; color: var(--white); }
+
+/* FORM */
+.contact-form {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 12px 16px;
+  transition: border-color var(--transition);
+  outline: none;
+  resize: none;
+}
+
+.form-group select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--red);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #444;
+}
+
+.form-success {
+  text-align: center;
+  color: #4caf50;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-top: 12px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  height: 0;
+  overflow: hidden;
+}
+
+.form-success.visible {
+  opacity: 1;
+  height: auto;
+  padding-top: 4px;
+}
+
+/* === FOOTER === */
+footer {
+  background: #050505;
+  border-top: 1px solid var(--border);
+  padding-top: 60px;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 48px;
+}
+
+.footer-brand .logo { font-size: 2rem; display: inline-block; margin-bottom: 12px; }
+.footer-brand p { color: var(--gray); font-size: 0.875rem; line-height: 1.7; }
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-links strong {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 6px;
+}
+.footer-links a {
+  font-size: 0.875rem;
+  color: #666;
+  transition: color var(--transition);
+}
+.footer-links a:hover { color: var(--white); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding: 20px 24px;
+  text-align: center;
+}
+.footer-bottom p { font-size: 0.75rem; color: #444; letter-spacing: 0.05em; }
+
+/* === RESPONSIVE === */
+@media (max-width: 1024px) {
+  .offer-grid { grid-template-columns: repeat(2, 1fr); }
+  .pricing-grid { gap: 16px; }
+  .price-card.popular { transform: none; }
+}
+
+@media (max-width: 768px) {
+  section { padding: 72px 0; }
+  h1 { font-size: clamp(3rem, 14vw, 5rem); }
+
+  /* nav mobile */
+  .hamburger { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 70px; left: 0; right: 0;
+    background: rgba(10,10,10,0.98);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links.open { height: auto; padding: 12px 0 24px; }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block;
+    padding: 14px 24px;
+    font-size: 0.875rem;
+  }
+  .nav-links a::after { display: none; }
+  .nav-cta { margin: 8px 24px 0; border-radius: var(--radius); text-align: center; padding: 12px !important; }
+
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+  .stat:nth-child(even) { border-right: none; }
+  .stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.2); }
+  .stat:nth-last-child(-n+2) { border-bottom: none; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-img-wrap { aspect-ratio: 16/9; }
+  .about-badge { bottom: -12px; left: 12px; }
+
+  .offer-grid { grid-template-columns: 1fr; }
+
+  .pricing-grid { grid-template-columns: 1fr; }
+  .price-card.popular { transform: none; border-color: var(--red); }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .gallery-item.tall { grid-row: span 1; }
+  .gallery-item.wide { grid-column: span 2; }
+  .gallery-overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); }
+
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  .form-row { grid-template-columns: 1fr; }
+
+  .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+
+  .contact-form { padding: 28px 20px; }
+}
+
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { text-align: center; }
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+}
+
+/* === ANIMATIONS === */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAWIGACJA -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="logo">FIT<span>ZONE</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">O nas</a></li>
+        <li><a href="#offer">Oferta</a></li>
+        <li><a href="#pricing">Cennik</a></li>
+        <li><a href="#gallery">Galeria</a></li>
+        <li><a href="#contact" class="nav-cta">Kontakt</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Twoja transformacja zaczyna się tutaj</p>
+      <h1>PRZEKROCZ<br><span>SWOJE</span><br>GRANICE</h1>
+      <p class="hero-sub">Profesjonalny sprzęt · Doświadczeni trenerzy · Realne efekty</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary">Wybierz plan</a>
+        <a href="#about" class="btn btn-ghost">Dowiedz się więcej</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span></span>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-num" data-target="1200">0</span><span class="stat-label">Członków</span></div>
+    <div class="stat"><span class="stat-num" data-target="15">0</span><span class="stat-label">Trenerów</span></div>
+    <div class="stat"><span class="stat-num" data-target="9">0</span><span class="stat-label">Lat doświadczenia</span></div>
+    <div class="stat"><span class="stat-num" data-target="40">0</span><span class="stat-label">Zajęć tygodniowo</span></div>
+  </div>
+
+  <!-- O NAS -->
+  <section id="about">
+    <div class="container about-grid">
+      <div class="about-text">
+        <p class="section-eyebrow">O nas</p>
+        <h2>Nie sprzedajemy<br><em>obietnic.</em><br>Dostarczamy wyniki.</h2>
+        <p>FITZONE to siłownia stworzona przez sportowców dla ludzi, którzy traktują treningi poważnie. Od 2015 roku pomagamy setkom osób przekształcić cele w nawyki, a nawyki w styl życia.</p>
+        <p>Nasz klub dysponuje ponad 1000 m² nowoczesnej przestrzeni treningowej, w pełni wyposażoną strefą wolnych ciężarów, maszynami cardio najnowszej generacji i dedykowaną strefą funkcjonalną.</p>
+        <a href="#offer" class="btn btn-primary">Zobacz ofertę</a>
+      </div>
+      <div class="about-visual">
+        <div class="about-img-wrap">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=700&q=80" alt="Wnętrze siłowni FITZONE" loading="lazy" />
+          <div class="about-badge">
+            <strong>+12k</strong>
+            <span>godzin treningów<br>w tym roku</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFERTA -->
+  <section id="offer">
+    <div class="container">
+      <p class="section-eyebrow center">Oferta</p>
+      <h2 class="center">Co znajdziesz<br>w FITZONE</h2>
+      <div class="offer-grid">
+
+        <div class="offer-card">
+          <div class="offer-icon">🏋️</div>
+          <h3>Strefa siłowa</h3>
+          <p>Ponad 200 sztang, hantli i maszyn. Dedykowane stanowiska do przysiadów, wyciskania i martwego ciągu.</p>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-icon">🏃</div>
+          <h3>Cardio & Bieżnie</h3>
+          <p>50 urządzeń cardio z ekranami HD, automatyczną regulacją i śledzeniem tętna w czasie rzeczywistym.</p>
+        </div>
+
+        <div class="offer-card featured">
+          <div class="offer-badge-tag">Popularne</div>
+          <div class="offer-icon">🤸</div>
+          <h3>Zajęcia grupowe</h3>
+          <p>CrossFit, yoga, HIIT, spinning, kickboxing – 40 różnych zajęć każdego tygodnia prowadzonych przez certyfikowanych trenerów.</p>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-icon">👤</div>
+          <h3>Personal Training</h3>
+          <p>Indywidualny plan treningowy i żywieniowy dopasowany do Twojego ciała, celów i harmonogramu.</p>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-icon">🛁</div>
+          <h3>Strefa relaksu</h3>
+          <p>Sauna fińska, prysznice, szatnie z zamkami elektrycznymi. Pełen komfort po każdym treningu.</p>
+        </div>
+
+        <div class="offer-card">
+          <div class="offer-icon">🥤</div>
+          <h3>Suplementy & Bar</h3>
+          <p>Fit-bar z koktajlami proteinowymi, naturalnymi sokami i suplementacją przygotowaną przez naszych dietetyków.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CENNIK -->
+  <section id="pricing">
+    <div class="container">
+      <p class="section-eyebrow center">Cennik</p>
+      <h2 class="center">Wybierz swój plan</h2>
+      <p class="section-sub center">Brak ukrytych opłat. Rezygnacja w każdej chwili.</p>
+      <div class="pricing-grid">
+
+        <div class="price-card">
+          <h3>BASIC</h3>
+          <div class="price"><span class="price-num">99</span><span class="price-unit">zł / mies.</span></div>
+          <ul class="price-features">
+            <li>✓ Dostęp do siłowni</li>
+            <li>✓ Strefa cardio</li>
+            <li>✓ Szatnia i sauna</li>
+            <li class="faded">✗ Zajęcia grupowe</li>
+            <li class="faded">✗ Personal training</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost full-width">Wybierz Basic</a>
+        </div>
+
+        <div class="price-card popular">
+          <div class="popular-tag">Najlepszy wybór</div>
+          <h3>PRO</h3>
+          <div class="price"><span class="price-num">159</span><span class="price-unit">zł / mies.</span></div>
+          <ul class="price-features">
+            <li>✓ Wszystko z Basic</li>
+            <li>✓ Nielimitowane zajęcia grupowe</li>
+            <li>✓ Aplikacja treningowa</li>
+            <li>✓ 1 sesja personal training</li>
+            <li class="faded">✗ Dedykowany trener</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary full-width">Wybierz Pro</a>
+        </div>
+
+        <div class="price-card">
+          <h3>ELITE</h3>
+          <div class="price"><span class="price-num">249</span><span class="price-unit">zł / mies.</span></div>
+          <ul class="price-features">
+            <li>✓ Wszystko z Pro</li>
+            <li>✓ Nielimitowany personal training</li>
+            <li>✓ Plan żywieniowy</li>
+            <li>✓ Priorytetowe rezerwacje</li>
+            <li>✓ Dedykowany opiekun</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost full-width">Wybierz Elite</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section id="gallery">
+    <div class="container">
+      <p class="section-eyebrow center">Galeria</p>
+      <h2 class="center">Zajrzyj do środka</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item tall">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="Trening siłowy" loading="lazy" />
+        <div class="gallery-overlay"><span>Strefa siłowa</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?w=600&q=80" alt="Zajęcia grupowe" loading="lazy" />
+        <div class="gallery-overlay"><span>Zajęcia grupowe</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80" alt="Cardio" loading="lazy" />
+        <div class="gallery-overlay"><span>Strefa cardio</span></div>
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=900&q=80" alt="Personal training" loading="lazy" />
+        <div class="gallery-overlay"><span>Personal Training</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80" alt="Stretching" loading="lazy" />
+        <div class="gallery-overlay"><span>Stretching & Yoga</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section id="contact">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <p class="section-eyebrow">Kontakt</p>
+        <h2>Zacznij już dziś</h2>
+        <p>Masz pytania? Chcesz umówić się na darmowy trening próbny? Napisz do nas – odpiszemy w ciągu 24h.</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div>
+              <strong>Adres</strong>
+              <span>ul. Sportowa 12, Gdańsk</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <div>
+              <strong>Telefon</strong>
+              <span>+48 58 123 45 67</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">🕐</span>
+            <div>
+              <strong>Godziny otwarcia</strong>
+              <span>Pon–Pt: 6:00–23:00<br>Sob–Ndz: 8:00–21:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contact-form" autocomplete="on" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Imię i nazwisko</label>
+            <input type="text" id="name" name="name" placeholder="Jan Kowalski" required />
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="jan@email.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Telefon (opcjonalnie)</label>
+          <input type="tel" id="phone" name="phone" placeholder="+48 600 000 000" />
+        </div>
+        <div class="form-group">
+          <label for="subject">Temat</label>
+          <select id="subject" name="subject">
+            <option value="">Wybierz temat</option>
+            <option>Darmowy trening próbny</option>
+            <option>Pytanie o członkostwo</option>
+            <option>Personal training</option>
+            <option>Inne</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Wiadomość</label>
+          <textarea id="message" name="message" rows="4" placeholder="Twoja wiadomość..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary full-width">Wyślij wiadomość</button>
+        <p class="form-success" id="form-success">✓ Wiadomość wysłana! Odezwiemy się wkrótce.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#hero" class="logo">FIT<span>ZONE</span></a>
+        <p>Nie ma skrótów do sukcesu.<br>Ale jest FITZONE.</p>
+      </div>
+      <div class="footer-links">
+        <strong>Nawigacja</strong>
+        <a href="#about">O nas</a>
+        <a href="#offer">Oferta</a>
+        <a href="#pricing">Cennik</a>
+        <a href="#gallery">Galeria</a>
+        <a href="#contact">Kontakt</a>
+      </div>
+      <div class="footer-links">
+        <strong>Social media</strong>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> FITZONE. Wszystkie prawa zastrzeżone.</p>
+    </div>
+  </footer>
+
+  <script>
+'use strict';
+
+/* =============================================
+   FITZONE – script.js
+============================================= */
+
+/* === NAVBAR: scroll effect === */
+const navbar = document.getElementById('navbar');
+const scrollThreshold = 50;
+
+function updateNavbar() {
+  if (window.scrollY > scrollThreshold) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+}
+window.addEventListener('scroll', updateNavbar, { passive: true });
+updateNavbar();
+
+/* === HAMBURGER MENU === */
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('nav-links');
+
+hamburger.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  hamburger.setAttribute('aria-expanded', isOpen);
+});
+
+// Close on link click
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', false);
+  });
+});
+
+/* === COUNTER ANIMATION === */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target, 10);
+  const duration = 1600;
+  const start = performance.now();
+
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // ease out
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target).toLocaleString('pl-PL');
+    if (progress < 1) requestAnimationFrame(update);
+  }
+
+  requestAnimationFrame(update);
+}
+
+const statNums = document.querySelectorAll('.stat-num');
+let countersStarted = false;
+
+function checkCounters(entries) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !countersStarted) {
+      countersStarted = true;
+      statNums.forEach(animateCounter);
+    }
+  });
+}
+
+const statsObserver = new IntersectionObserver(checkCounters, { threshold: 0.3 });
+const statsBar = document.querySelector('.stats-bar');
+if (statsBar) statsObserver.observe(statsBar);
+
+/* === SCROLL REVEAL === */
+function addRevealClasses() {
+  const targets = [
+    '.about-text',
+    '.about-visual',
+    '.offer-card',
+    '.price-card',
+    '.gallery-item',
+    '.contact-info',
+    '.contact-form',
+  ];
+
+  targets.forEach(selector => {
+    document.querySelectorAll(selector).forEach((el, i) => {
+      el.classList.add('reveal');
+      el.style.transitionDelay = `${i * 0.08}s`;
+    });
+  });
+}
+
+addRevealClasses();
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+);
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* === ACTIVE NAV LINK (scroll spy) === */
+const sections = document.querySelectorAll('section[id], div[id="hero"]');
+const navAnchors = document.querySelectorAll('.nav-links a');
+
+const spyObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAnchors.forEach(a => a.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  },
+  { threshold: 0.45 }
+);
+
+sections.forEach(s => spyObserver.observe(s));
+
+/* === CONTACT FORM === */
+const form = document.getElementById('contact-form');
+const successMsg = document.getElementById('form-success');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  // Basic validation
+  const required = form.querySelectorAll('[required]');
+  const email = document.getElementById('email');
+  let valid = true;
+
+  required.forEach(field => {
+    field.style.borderColor = '';
+    if (!field.value.trim()) {
+      field.style.borderColor = '#e31d1d';
+      valid = false;
+    }
+  });
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email.value)) {
+    email.style.borderColor = '#e31d1d';
+    valid = false;
+  }
+
+  if (!valid) return;
+
+  // Simulate send
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Wysyłanie...';
+
+  setTimeout(() => {
+    btn.textContent = 'Wyślij wiadomość';
+    btn.disabled = false;
+    form.reset();
+    successMsg.classList.add('visible');
+    setTimeout(() => successMsg.classList.remove('visible'), 5000);
+  }, 1200);
+});
+
+/* === GALLERY LIGHTBOX (simple) === */
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+galleryItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const img = item.querySelector('img');
+    const label = item.querySelector('.gallery-overlay span')?.textContent || '';
+
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position:fixed; inset:0; background:rgba(0,0,0,0.92);
+      display:flex; align-items:center; justify-content:center;
+      z-index:9999; cursor:zoom-out; flex-direction:column; gap:16px;
+      padding:24px;
+    `;
+
+    const image = document.createElement('img');
+    image.src = img.src.replace('w=600', 'w=1200').replace('w=900', 'w=1400');
+    image.style.cssText = `
+      max-width:90vw; max-height:80vh; object-fit:contain;
+      border-radius:2px; box-shadow:0 24px 80px rgba(0,0,0,0.8);
+    `;
+
+    const caption = document.createElement('p');
+    caption.textContent = label;
+    caption.style.cssText = `
+      font-family:'Bebas Neue',sans-serif; font-size:1.2rem;
+      letter-spacing:0.12em; color:#fff; opacity:0.7;
+    `;
+
+    overlay.append(image, caption);
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+
+    overlay.addEventListener('click', () => {
+      overlay.remove();
+      document.body.style.overflow = '';
+    });
+
+    document.addEventListener('keydown', function handler(ev) {
+      if (ev.key === 'Escape') {
+        overlay.remove();
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', handler);
+      }
+    });
+  });
+});
+
+/* === SMOOTH SCROLL POLYFILL for older browsers === */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', (e) => {
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+</script>
+</body>
+</html>
